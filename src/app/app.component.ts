@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from './session.service';
+import { SessionService } from './services/session.service';
+import { Router } from '@angular/router'; //only if you want to redirect somebody
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import { SessionService } from './session.service';
 })
 export class AppComponent implements OnInit {
   user: any;
+  isLoggedIn: boolean = false;
+
   formInfo = {
     username: '',
     password: ''
@@ -15,54 +18,74 @@ export class AppComponent implements OnInit {
   error: string;
   privateData: any = '';
 
-  constructor(private session: SessionService) { }
+  constructor(
+    private sessionThang: SessionService,
+    private routerThang: Router
+  ) { }
 
   ngOnInit() {
-    this.session.isLoggedIn()
-      .subscribe(
-        (user) => this.successCb(user)
-      );
+    this.sessionThang.loggedIn$.subscribe((userfromApi) => {
+      this.isLoggedIn = true;
+    })
+
+    this.sessionThang.checkLogin()
+    .then((userInfo) => {
+      this.routerThang.navigate(['/lists']);
+      this.isLoggedIn = true;
+
+    })
+    .catch(( err ) => {
+      this.routerThang.navigate(['/']);
+
+    });
   }
 
-  login() {
-    this.session.login(this.formInfo)
-      .subscribe(
-        (user) => this.successCb(user),
-        (err) => this.errorCb(err)
-      );
+  //   this.sessionThang.isLoggedIn()
+  //     .subscribe(
+  //       (user) => this.successCb(user)
+  //     );
+  // }
+
+  // handleLogin(userfromApi) {
+  //   this.sessionThang.login(this.formInfo)
+  //     .subscribe(
+  //       (user) => this.successCb(user),
+  //       (err) => this.errorCb(err)
+  //     );
+  // }
+
+  // signup() {
+  //   this.sessionThang.signup(this.formInfo)
+  //     .subscribe(
+  //       (user) => this.successCb(user),
+  //       (err) => this.errorCb(err)
+  //     );
+  // }
+
+  logMeOut() {
+    this.sessionThang.logout()
+      .then(() => {
+        this.routerThang.navigate(['/']);
+        this.isLoggedIn = false;
+      })
+      .catch(()=> {});
   }
 
-  signup() {
-    this.session.signup(this.formInfo)
-      .subscribe(
-        (user) => this.successCb(user),
-        (err) => this.errorCb(err)
-      );
-  }
+  // getPrivateData() {
+  //   this.sessionThang.getPrivateData()
+  //     .subscribe(
+  //       (data) => this.privateData = data,
+  //       (err) => this.error = err
+  //     );
+  // }
 
-  logout() {
-    this.session.logout()
-      .subscribe(
-        () => this.successCb(null),
-        (err) => this.errorCb(err)
-      );
-  }
+  // errorCb(err) {
+  //   this.error = err;
+  //   this.user = null;
+  // }
 
-  getPrivateData() {
-    this.session.getPrivateData()
-      .subscribe(
-        (data) => this.privateData = data,
-        (err) => this.error = err
-      );
+  // successCb(user) {
+  //   this.user = user;
+  //   this.error = null;
+  // }
   }
-
-  errorCb(err) {
-    this.error = err;
-    this.user = null;
-  }
-
-  successCb(user) {
-    this.user = user;
-    this.error = null;
-  }
-}

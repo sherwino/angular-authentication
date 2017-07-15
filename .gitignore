@@ -7,6 +7,8 @@
 
 # dependencies
 /node_modules
+/express-app/node_modules
+/angular-app/node_modules
 
 # IDEs and editors
 /.idea
