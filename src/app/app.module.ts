@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ListsPageComponent } from './lists-page/lists-page.component';
@@ -23,6 +24,7 @@ import { SessionService } from './services/session.service';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpModule
   ],
