@@ -6,18 +6,20 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CardService {
-  baseUrl: string = environment.apiURL
+  baseUrl: string = environment.apiUrl;
 
   constructor(
     private httpThang: Http
   ) { }
 
   createCard(listId, title) {
-    return this.httpThang.post(`${this.baseUrl}/api/lists/${listId}/cards`,
-  { cardTitle: title } ,
-  { withCredentials: true })
-  .toPromise()
-  .then(res => res.json())
+      return this.httpThang
+        .post(
+          `${this.baseUrl}/api/lists/${listId}/cards`,
+          { cardTitle: title },
+          { withCredentials: true }
+        )
+        .toPromise()
+        .then(res => res.json())
   }
-
 }

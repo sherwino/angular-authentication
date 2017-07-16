@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionService } from '../services/session.service';
 
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,9 +10,8 @@ import { SessionService } from '../services/session.service';
 })
 export class SignUpComponent implements OnInit {
   newUser: any = {};
-  errorMessage: string;
 
-  // @Output() onSignUpSubmit = new EventEmitter<any>();
+  errorMessage: string;
 
   constructor(
     private sessionThang: SessionService,
@@ -22,17 +21,16 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
   }
 
-    submitSignup () {
+  submitSignup() {
       this.sessionThang.signup(this.newUser)
-      .then((userFromApi) => {
-        this.routerThang.navigate(['/lists']);
-        this.sessionThang.loggedIn(userFromApi);
-      })
-      .catch((errResponse) => {
-        const apiInfo = errResponse.json();
-        this.errorMessage = apiInfo.message;
-      })
-    }
-
+        .then((userFromApi) => {
+            this.routerThang.navigate(['/lists']);
+            this.sessionThang.loggedIn(userFromApi);
+        })
+        .catch((errResponse) => {
+            const apiInfo = errResponse.json();
+            this.errorMessage = apiInfo.message;
+        })
+  }
 
 }

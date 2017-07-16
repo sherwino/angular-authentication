@@ -1,24 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; //only if you want to redirect somebody
+import { Router } from '@angular/router';
+
 import { SessionService } from './services/session.service';
-import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title: 'IronTrello App'
-  isLoggedIn: boolean = false;
-  // user: any;
+export class AppComponent {
+  title = 'app';
 
-  // formInfo = {
-  //   username: '',
-  //   password: ''
-  // };
-  // error: string;
-  // privateData: any = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private sessionThang: SessionService,
@@ -26,67 +19,32 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sessionThang.loggedIn$.subscribe((userFromApi) => {
-      this.isLoggedIn = true;
-    })
+      this.sessionThang.loggedIn$.subscribe((userFromApi) => {
+          this.isLoggedIn = true;
+      });
 
-    this.sessionThang.checkLogin()
-    // if logged in, redirect to /lists
-    .then((userInfo) => {
-      this.routerThang.navigate(['/lists']);
-      this.isLoggedIn = true;
-
-    })
-    // else redirect to
-    .catch(( err ) => {
-      this.routerThang.navigate(['/']);
-
-    });
+      this.sessionThang.checkLogin()
+        // if logged in, redirect to /lists
+        .then((userInfo) => {
+            this.routerThang.navigate(['/lists']);
+            this.isLoggedIn = true;
+        })
+        // else redirect to /
+        .catch((err) => {
+            this.routerThang.navigate(['/']);
+        });
   }
 
   logMeOut() {
-    this.sessionThang.logout()
-    .then(() => {
-      this.routerThang.navigate(['/']);
-      this.isLoggedIn = false;
-    })
-    .catch(()=> {});
+      this.sessionThang.logout()
+        .then(() => {
+            this.routerThang.navigate(['/']);
+            this.isLoggedIn = false;
+        })
+        .catch(() => {});
   }
 
   handleLogin(userFromApi) {
-    this.isLoggedIn = true;
+      this.isLoggedIn = true;
   }
 }
-
-  //   this.sessionThang.isLoggedIn()
-  //     .subscribe(
-  //       (user) => this.successCb(user)
-  //     );
-  // }
-
-  // signup() {
-  //   this.sessionThang.signup(this.formInfo)
-  //     .subscribe(
-  //       (user) => this.successCb(user),
-  //       (err) => this.errorCb(err)
-  //     );
-  // }
-
-
-  // getPrivateData() {
-  //   this.sessionThang.getPrivateData()
-  //     .subscribe(
-  //       (data) => this.privateData = data,
-  //       (err) => this.error = err
-  //     );
-  // }
-
-  // errorCb(err) {
-  //   this.error = err;
-  //   this.user = null;
-  // }
-
-  // successCb(user) {
-  //   this.user = user;
-  //   this.error = null;
-  // }

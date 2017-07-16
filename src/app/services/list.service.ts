@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ListService {
-  baseUrl: string = environment.apiURL;
+  baseUrl: string = environment.apiUrl;
 
   constructor(
     private httpThang: Http

@@ -1,10 +1,10 @@
-import { AuthAppPage } from './app.po';
+import { IrontrelloAngularPage } from './app.po';
 
-describe('auth-app App', () => {
-  let page: AuthAppPage;
+describe('irontrello-angular App', () => {
+  let page: IrontrelloAngularPage;
 
   beforeEach(() => {
-    page = new AuthAppPage();
+    page = new IrontrelloAngularPage();
   });
 
   it('should display welcome message', () => {

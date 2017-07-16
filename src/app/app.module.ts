@@ -29,8 +29,8 @@ import { SessionService } from './services/session.service';
     HttpModule
   ],
   providers: [
-    SessionService,
     CardService,
+    ListService,
     SessionService
   ],
   bootstrap: [AppComponent]

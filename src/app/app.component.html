@@ -1,15 +1,17 @@
 <header>
   <h1> Irontrello </h1>
-  <nav>
-  <button *ngIf="isLoggedIn" (click) = "logMeOut()">
-    Log Out
-  </button>
-</nav>
 
+  <nav>
+    <button *ngIf="isLoggedIn" (click)="logMeOut()">
+      Log Out
+    </button>
+  </nav>
 </header>
+
 
 <router-outlet></router-outlet>
 
+
 <footer>
-  <p> Made with &hearts; at Ironhack </p>
+  <p> Made with 🥙 at Ironhack. </p>
 </footer>

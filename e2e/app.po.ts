@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class AuthAppPage {
+export class IrontrelloAngularPage {
   navigateTo() {
     return browser.get('/');
   }
