@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class ListService {
-    baseUrl: string = 'http://localhost:3000';
+    baseUrl: string = environment.apiURL;
 
   constructor(
     private httpThang: Http
@@ -10,15 +13,15 @@ export class ListService {
 
 lists() {
   return this.httpThang
-  .get(this.baseUrl + '/api/lists', 
+  .get(this.baseUrl + '/api/lists',
   {withCredentials: true })
   .toPromise()
   .then( res => res.json());
 }
 
 createList(title) {
-  return this.httpThang.post(this.baseUrl + '/api/lists', 
-{ listTitle: title }, 
+  return this.httpThang.post(this.baseUrl + '/api/lists',
+{ listTitle: title },
 { withCredentials: true }
 )
 .toPromise()

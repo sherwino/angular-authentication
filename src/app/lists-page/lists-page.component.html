@@ -11,7 +11,7 @@
       </li>
       <li>
         <form (ngSubmmit)="makeACard(oneList, i)">
-          <input type = "text" placeholder="Add a card.."
+          <input class="card" type = "text" placeholder="Add a card.."
           [(ngModel)]="newCardTitles[i]" name="newCardTitle[]">
           <br>
           <button> Save </button>
@@ -21,8 +21,8 @@
 </ul>
 
 
-<form (ngSubmit) = "makeAList()">
-  <input type ="text" placeholder="Add a list..." [(ngModel)]="newListTitle" name="newListTitle">
-<button> Save </button>
-</form>
+  <form (ngSubmit) = "makeAList()">
+    <input type ="text" placeholder="Add a list..." [(ngModel)]="newListTitle" name="newListTitle">
+    <button> Save </button>
+  </form>
 </div>

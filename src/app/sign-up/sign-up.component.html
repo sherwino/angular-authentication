@@ -1,4 +1,9 @@
 <h3> Sign Up </h3>
+
+<p class="error" *ngIf="errorMessage">
+  {{ errorMessage }}
+</p>
+
 <form (ngSubmit) = "submitSignup()">
   <label for="full-name-input"> Full Name </label>
   <input id = "full-name-input" type='text' placeholder= "Bob Boberton"
@@ -16,4 +21,4 @@
   <br>
 
   <button> Sign Up </button>
-
+</form>
