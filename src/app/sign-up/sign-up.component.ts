@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
   }
 
-    submitSignup (userFromApi) {
+    submitSignup () {
       this.sessionThang.signup(this.newUser)
       .then((userFromApi) => {
         this.routerThang.navigate(['/lists']);

@@ -47,7 +47,7 @@ baseUrl: string = environment.apiURL;
 
   // -------------------------SIGN UP----------------------
   signup(userInfo) {
-    return this.myHttpThang.post(this.baseUrl + `/signup`, userInfo,
+    return this.myHttpThang.post(this.baseUrl + `/api/signup`, userInfo,
       { withCredentials: true})
       .toPromise()
       .then( res => res.json());
@@ -55,15 +55,15 @@ baseUrl: string = environment.apiURL;
 
 // -------------------------LOG OUT----------------------
   logout() {
-    return this.myHttpThang.post(this.baseUrl + `/logout`, {}, { withCredentials: true})
+    return this.myHttpThang.post(this.baseUrl + `/api/logout`, {}, { withCredentials: true})
       .toPromise()
       .then( res => res.json());
   }
 
 
-  handleError(e) {
-    return Observable.throw(e.json().message);
-  }
+  // handleError(e) {
+  //   return Observable.throw(e.json().message);
+  // }
 
   // isLoggedIn() {
   //   return this.myHttpThang.get(`/loggedin`)

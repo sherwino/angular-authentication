@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ListService } from '../services/list.service';
 import { CardService } from '../services/card.service';
-
-
 
 @Component({
   selector: 'app-lists-page',
@@ -11,7 +10,8 @@ import { CardService } from '../services/card.service';
 })
 export class ListsPageComponent implements OnInit {
   myLists: any[] = [];
-  newlistTitle: string;
+
+  newListTitle: string;
 
   newCardTitles: string[] = [];
 
@@ -21,37 +21,37 @@ export class ListsPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.listThang.lists()
-    .then((listsFromApi) => {
-      this.myLists = listsFromApi;
-
-    })
-    .catch((errResponse) => {
-      alert('List error ');
-
-    });
+      this.listThang.lists()
+        .then((listsFromApi) => {
+            this.myLists = listsFromApi;
+        })
+        .catch((errResponse) => {
+            alert('List error 🐋');
+        });
   }
 
   makeAList() {
-    this.listThang.createList(this.newlistTitle)
-    .then((newListFromApi) => {
-      this.myLists.push(newListFromApi);
-      this.newlistTitle = "";
-    })
-    .catch((errResponse) => {
-      alert('list create made me an error');
-    });
+      this.listThang.createList(this.newListTitle)
+        .then((newListFromApi) => {
+            this.myLists.push(newListFromApi);
+            this.newListTitle = '';
+        })
+        .catch((errResponse) => {
+            alert('List create error 🐋');
+        });
   }
-  makeACard(theList, titleIndex) {
-    const theTitle = this.newCardTitles[titleIndex];
 
-    this.cardThang.createCard(theList._id, theTitle)
-    .then((newCardFromApi) => {
-      theList.cards.push(newCardFromApi);
-      this.newCardTitles[titleIndex] = '';
-    })
-    .catch((errResponse) => {
-      alert(' Card create error ');
-    });
+  makeACard(theList, titleIndex) {
+      const theTitle = this.newCardTitles[titleIndex];
+
+      this.cardThang.createCard(theList._id, theTitle)
+        .then((newCardFromApi) => {
+            theList.cards.push(newCardFromApi);
+            this.newCardTitles[titleIndex] = '';
+        })
+        .catch((errResponse) => {
+            alert('Card create error 🐋');
+        });
   }
+
 }

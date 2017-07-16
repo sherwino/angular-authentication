@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; //only if you want to redirect somebody
 import { SessionService } from './services/session.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { SessionService } from './services/session.service';
 export class AppComponent implements OnInit {
   title: 'IronTrello App'
   isLoggedIn: boolean = false;
-  user: any;
+  // user: any;
 
   // formInfo = {
   //   username: '',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sessionThang.loggedIn$.subscribe((userfromApi) => {
+    this.sessionThang.loggedIn$.subscribe((userFromApi) => {
       this.isLoggedIn = true;
     })
 
@@ -52,7 +53,7 @@ export class AppComponent implements OnInit {
     .catch(()=> {});
   }
 
-  handleLogin(userfromApi) {
+  handleLogin(userFromApi) {
     this.isLoggedIn = true;
   }
 }
